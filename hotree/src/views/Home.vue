@@ -2,9 +2,9 @@
   <div>
     <Header title="New event"/>
     <div class="container">
-      <FormPartAbout @titleValue="setTitle" @descriptionValue="setDescription" @categoryValue="setCategory" @freeValue="setFree" @paidValue="setPaid" @rewardValue="setReward"/>
-      <FormPartCoordinator @nameValue="setName"/>
-      <FormPartWhen @datValue="setDat" @timeValue="setTime" @amValue="setAm" @pmValue="setPm" @secondsValue="setSeconds"/>
+      <FormPartAbout @valueEmit="setValue"/>
+      <FormPartCoordinator @valueEmit="setValue"/>
+      <FormPartWhen @valueEmit="setValue" @datValue="setDat" @timeValue="setTime" @amValue="setAm" @pmValue="setPm" @secondsValue="setSeconds"/>
     <button @click="validateForm">Publish event</button>
     </div>
   </div>
@@ -50,8 +50,23 @@ export default {
     }
   },
   methods: {
+
+
+    // valueEmit(value){
+    //   var valueDescrip = value.currentTarget.value;
+    //   this.$emit("valueDescrip", this.value.currentTarget.value);
+    //   console.log(this.valueDescrip);
+    // },
+
+    setValue(value){
+      this.title = value;
+      console.log(this.title);
+    },
+
+
      setTitle(msg) {
     this.title = msg;
+    console.log(this.title);
   },
        setDescription(msg) {
     this.description = msg;
@@ -61,9 +76,11 @@ export default {
   },
   setFree(msg){
     this.free = msg;
+    console.log(this.free);
   },
   setPaid(msg){
     this.paid = msg;
+    console.log(this.paid);
   },
   setReward(msg){
     this.reward = msg;
@@ -84,8 +101,9 @@ export default {
     this.pm = msg;
   },
   setSeconds(msg){
-    var sec = msg*60*60
+    var sec = msg;
     this.seconds = sec;
+    console.log(this.seconds);
   },
 
   validateForm(){

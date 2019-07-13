@@ -10,19 +10,19 @@
           type="date"
           id="start"
           name="trip-start"
-          value="dd/mm/yyyy"
+          value=""
           min=""
           v-on:blur="datValue"
           v-model="dat"
         />
         <label>at</label>
-        <input width="90px" type="time" v-on:blur="timeValue" v-model="time"/>
-        <input type="checkbox" width="90px" v-on:blur="amValue" v-model="am"/> AM
-        <input type="checkbox" width="90px" v-on:blur="pmValue" v-model="pm"/> PM
+        <input width="90px" type="time" v-on:blur="valueEmit" v-model="time"/>
+        <input type="checkbox" width="90px" v-model="am" v-on:click="valueEmit"/> AM
+        <input type="checkbox" width="90px" v-model="pm" v-on:click="valueEmit"/> PM
       </form>
       <form>
         <h4>Duration</h4>
-         <!-- <DateTimePicker v-model="myDate" :options="options"></DateTimePicker> -->
+
         <input type="number" min="1" v-on:blur="secondsValue" v-model="seconds" placeholder="Number"/>
      hour
       </form>
@@ -32,7 +32,6 @@
 
 
 <script>
- import DateTimePicker from "simple-vue2-datetimepicker";
 
 export default {
   name: "FormPartWhen",
@@ -41,7 +40,7 @@ export default {
           myDate: new Date(),
           options: {
               timeFormat: {
-                    locale: "en-US",
+                    // locale: "en-US",
                     weekday: "short",
                     year: "numeric",
                     month: "short",
@@ -56,38 +55,26 @@ export default {
           },
           dat: '',
           time: '',
-          pm: '',
-          am: '',
+          pm: Boolean,
+          am: Boolean,
           seconds: ''
       }
   },
-  components: {
-     DateTimePicker
-  },
+
   methods: {
+       valueEmit(value) {
+      var valueEmit = value.currentTarget.value;
+      this.$emit("valueEmit", value.currentTarget.value);
+    },
     datValue(){
-      var datValue = this.dat;
-       this.$emit("datValue", this.dat);
-        console.log(datValue);
-    },
-         timeValue() {
-      var timeValue = this.time;
-       this.$emit("timeValue", this.time);
-        console.log(timeValue);
-    },
-         amValue() {
-      var amValue = this.am;
-       this.$emit("amValue", this.am);
-        console.log(amValue);
-    },
-    pmValue() {
-      var pmValue = this.pm;
-       this.$emit("pmValue", this.pm);
-        console.log(pmValue);
+      var correctData = new Date("30 July 2010 15:05 UTC").toISOString().substring(0,16);
+      this.dat = correctData;
+       this.$emit("correctData", this.dat);
+        console.log(this.dat);
     },
     secondsValue() {
       var secondsValue = this.seconds;
-      this.$emit("secondsValue", this.seconds);
+      this.$emit("secondsValue", (this.seconds)*60*60);
       console.log(secondsValue);
     }
   }

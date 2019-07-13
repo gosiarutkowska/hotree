@@ -4,17 +4,24 @@
       <hr />
       <form>
         <h4>Responsible</h4>
-        <select v-model="selectedEmploye" v-on:blur="nameValue">
+        <select v-model="selectedEmploye" v-on:blur="valueEmit">
+          <option>
+            <!-- <label>me</label>
+            {{}} -->
+          </option>
           <option
             v-for="employe in employes"
             :key="employe.name"
-          >{{employe.name}} {{employe.lastname}}</option>
+            selected="employee[3]"
+          >
+          
+          {{employe.name}} {{employe.lastname}}</option>
         </select>
       </form>
 
       <form>
         <h4>email</h4>
-        <autocomplete :source="employes"  results-display="email" v-model="selectedMail" v-on:click="mailValue">{{selectedMail}}</autocomplete>
+        <autocomplete :source="employes"   results-property="data" results-display="email" v-model="selectedMail" @selected="mailValue">{{selectedMail}}</autocomplete>
       </form>
       <form>
         <h4 class="addMailLabel">or add email address</h4>
@@ -41,27 +48,22 @@ export default {
     Autocomplete
   },
   methods: {
-      nameValue () {
-      var nameValue = this.selectedEmploye;
-      this.$emit("nameValue", this.selectedEmploye);
-          console.log(this.selectedEmploye);
+     valueEmit(value) {
+      var valueEmit = value.currentTarget.value;
+      this.$emit("valueEmit", value.currentTarget.value);
     },
-      mailValue () {
-      var mailValue = this.selectedMail;
+      mailValue (value) {
+        console.log('dddddddddddd');
+      var mailValue = this.selectedMail.currentTarget.value;
+      console.log(mailValue);
       this.$emit("mailValue", this.selectedMail);
-          console.log(this.selectedMail);
+          console.log(this.mailValue);
+          console.log('dddd');
     }
   }
 };
 </script>
 
 <style scoped>
-.autocomplete {
-  width: 70%;
-}
-.addMailLabel{
-  font-size: 10px;
-  color: grey;
-}
 
 </style>
