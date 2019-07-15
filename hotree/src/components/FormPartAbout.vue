@@ -34,7 +34,7 @@
       </form>
       <form>
         <h4>Payment</h4>
-        <input type="checkbox" width="90px" v-model="free" v-on:click="valueEmit" /> Free event
+        <input type="checkbox" width="90px" v-model="free" v-on:click="valueEmit" /> Free event {{free}}
         <input type="checkbox" width="90px" v-model="paid" v-on:click="paidValue" /> Paid event
       </form>
       <form v-show="isShowing">
@@ -65,7 +65,7 @@ export default {
       selectedCategory: "categories",
       title: "",
       description: "",
-      free: "",
+      free: 1,
       paid: "",
       reward: "",
       isShowing: false
@@ -76,7 +76,7 @@ export default {
     valueEmit(value) {
       var valueEmit = value.currentTarget.value;
       this.$emit("valueEmit", value.currentTarget.value);
-      // console.log(this.valueDescrip);
+      console.log(this.valueDescrip);
     },
     paidValue() {
       var paidValue = this.paid;

@@ -38,6 +38,13 @@ body {
     color: $colorLabel;
   }
 }
+ .container {
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .header {
   background-color: $colorHeaderBackground;

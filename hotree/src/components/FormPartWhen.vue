@@ -10,10 +10,11 @@
           type="date"
           id="start"
           name="trip-start"
-          value=""
-          min=""
-          v-on:blur="datValue"
+          value="dat"
+          min="todayValue"
           v-model="dat"
+          v-on:blur="datValue"
+          
         />
         <label>at</label>
         <input width="90px" type="time" v-on:blur="valueEmit" v-model="time"/>
@@ -57,7 +58,8 @@ export default {
           time: '',
           pm: Boolean,
           am: Boolean,
-          seconds: ''
+          seconds: '',
+
       }
   },
 
@@ -67,7 +69,7 @@ export default {
       this.$emit("valueEmit", value.currentTarget.value);
     },
     datValue(){
-      var correctData = new Date("30 July 2010 15:05 UTC").toISOString().substring(0,16);
+      var correctData = new Date().toISOString().substring(0,16);
       this.dat = correctData;
        this.$emit("correctData", this.dat);
         console.log(this.dat);

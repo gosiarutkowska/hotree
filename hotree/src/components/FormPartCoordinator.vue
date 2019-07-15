@@ -21,11 +21,11 @@
 
       <form>
         <h4>email</h4>
-        <autocomplete :source="employes"   results-property="data" results-display="email" v-model="selectedMail" @selected="mailValue">{{selectedMail}}</autocomplete>
+        <!-- <autocomplete :source="employes"   results-property="data" results-display="email" v-model="selectedMail" @selected="mailValue">{{selectedMail}}</autocomplete> -->
       </form>
       <form>
         <h4 class="addMailLabel">or add email address</h4>
-        <input type="email" placeholder="Email"/>
+        <input type="email" id="mail" placeholder="Email" v-model="email" v-on:blur="valueEmit"/>
       </form>
     </section>
   </div>
@@ -41,7 +41,8 @@ export default {
     return {
       employes,
       selectedEmploye: "",
-      selectedMail: ""
+      selectedMail: "",
+      email: ""
     };
   },
   components: {
